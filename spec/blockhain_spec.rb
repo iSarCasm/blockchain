@@ -73,33 +73,23 @@ describe Blockchain do
         'hash1' => @block1,
         'hash2' => @block2,
       }
+      blockchain.instance_variable_set(:@blocks, @blocks)
+      blockchain.instance_variable_set(:@previous_block_hash, 'hash3')
     end
 
     it 'returns blocks in correct order even if time is messed up' do
-      blockchain.instance_variable_set(:@blocks, @blocks)
-      blockchain.instance_variable_set(:@previous_block_hash, 'hash3')
-
       expect(blockchain.get_blocks(3)).to eq [@block1, @block2, @block3]
     end
 
     it 'returns all blocks if amount is higher than blocks size' do
-      blockchain.instance_variable_set(:@blocks, @blocks)
-      blockchain.instance_variable_set(:@previous_block_hash, 'hash3')
-
       expect(blockchain.get_blocks(10)).to eq [@block1, @block2, @block3]
     end
 
     it 'returns empty array if amount is below 1' do
-      blockchain.instance_variable_set(:@blocks, @blocks)
-      blockchain.instance_variable_set(:@previous_block_hash, 'hash3')
-
       expect(blockchain.get_blocks(-1)).to eq []
     end
 
     it 'returns last blocks' do
-      blockchain.instance_variable_set(:@blocks, @blocks)
-      blockchain.instance_variable_set(:@previous_block_hash, 'hash3')
-
       expect(blockchain.get_blocks(2)).to eq [@block2, @block3]
     end
   end
