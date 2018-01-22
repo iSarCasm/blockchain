@@ -6,6 +6,8 @@ To run:
 2. `gem install bunlder`
 3. `bundle install`
 4. `ruby app.rb`
+To run tests:
+`rspec`
 
 Uses Sinatra to reduce HTTP specific stuff
 
