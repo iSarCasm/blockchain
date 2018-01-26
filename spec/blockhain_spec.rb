@@ -24,12 +24,12 @@ describe Blockchain do
         5.times { blockchain.add_data '12345' }
 
         @payload = {
-          previous_block_hash: 0,
-          rows: ['12345', '12345', '12345', '12345', '12345'],
-          timestamp: Time.now.to_i
+          'previous_block_hash' => 0,
+          'rows' => ['12345', '12345', '12345', '12345', '12345'],
+          'timestamp' => Time.now.to_i
         }
         @hash = Digest::SHA256.new.hexdigest(@payload.to_s)
-        @block = @payload.merge(block_hash: @hash)
+        @block = @payload.merge('block_hash' => @hash)
       end
 
       it 'resets internal data' do
@@ -37,10 +37,6 @@ describe Blockchain do
       end
 
       describe 'adds new block to blocks' do
-        it 'increases amount of blocks' do
-          expect(blockchain.blocks.size).to eq 1
-        end
-
         it 'creates valid block' do
           expect(blockchain.blocks[@hash]).to eq @block
         end
@@ -51,22 +47,22 @@ describe Blockchain do
   describe '#get_blocks' do
     before do
       @block1 = {
-        previous_block_hash: 0,
-        rows: [1, 2, 3, 4, 5],
-        timestamp: 30,
-        block_hash: 'hash1'
+        'previous_block_hash' => 0,
+        'rows' => [1, 2, 3, 4, 5],
+        'timestamp' => 30,
+        'block_hash' => 'hash1'
       }
       @block2 = {
-        previous_block_hash: 'hash1',
-        rows: [1, 2, 3, 4, 5],
-        timestamp: 10,
-        block_hash: 'hash2'
+        'previous_block_hash' => 'hash1',
+        'rows' => [1, 2, 3, 4, 5],
+        'timestamp' => 10,
+        'block_hash' => 'hash2'
       }
       @block3 = {
-        previous_block_hash: 'hash2',
-        rows: [1, 2, 3, 4, 5],
-        timestamp: 0,
-        block_hash: 'hash3'
+        'previous_block_hash' => 'hash2',
+        'rows' => [1, 2, 3, 4, 5],
+        'timestamp' => 0,
+        'block_hash' => 'hash3'
       }
       @blocks = {
         'hash3' => @block3,

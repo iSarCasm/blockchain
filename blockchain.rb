@@ -1,3 +1,4 @@
+require_relative './persistance'
 require 'digest'
 
 class Blockchain
@@ -6,16 +7,17 @@ class Blockchain
   def initialize
     @previous_block_hash  = 0
     @data   = Array.new
-    @blocks = Hash.new
+    @blocks = Persistance.new
     @sha256 = Digest::SHA256.new
+    @Persistance = Persistance.new
   end
 
   def add_data(data)
     @data << data
     if @data.size == 5
       block = create_new_block
-      @blocks[block[:block_hash]] = block
-      @previous_block_hash = block[:block_hash]
+      @blocks[block['block_hash']] = block
+      @previous_block_hash = block['block_hash']
       @data.clear
     end
   end
@@ -24,7 +26,7 @@ class Blockchain
     hash = @previous_block_hash
     [amount, @blocks.size].min.times.with_object([]) do |_, blockchain|
       blockchain << @blocks[hash]
-      hash = blockchain.last[:previous_block_hash]
+      hash = blockchain.last['previous_block_hash']
     end.reverse
   end
 
@@ -32,12 +34,12 @@ class Blockchain
 
   def create_new_block
     payload = {
-      previous_block_hash: @previous_block_hash,
-      rows: @data.dup,
-      timestamp: Time.now.to_i
+      'previous_block_hash' => @previous_block_hash,
+      'rows' => @data.dup,
+      'timestamp' => Time.now.to_i
     }
     {
-      block_hash: hash(payload)
+      'block_hash' => hash(payload)
     }.merge(payload)
   end
 
