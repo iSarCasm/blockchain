@@ -5,11 +5,10 @@ class Blockchain
   attr_reader :data, :blocks, :previous_block_hash
 
   def initialize
-    @previous_block_hash  = 0
+    @previous_block_hash = 0
     @data   = Array.new
     @blocks = Persistance.new
     @sha256 = Digest::SHA256.new
-    @Persistance = Persistance.new
   end
 
   def add_data(data)
@@ -24,10 +23,12 @@ class Blockchain
 
   def get_blocks(amount)
     hash = @previous_block_hash
-    [amount, @blocks.size].min.times.with_object([]) do |_, blockchain|
-      blockchain << @blocks[hash]
+    blockchain = []
+    while((block = @blocks[hash]) && (amount -= 1) >= 0)
+      blockchain << block
       hash = blockchain.last['previous_block_hash']
-    end.reverse
+    end
+    blockchain.reverse
   end
 
   private

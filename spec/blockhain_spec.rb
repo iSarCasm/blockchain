@@ -1,4 +1,6 @@
 require_relative '../blockchain'
+require_relative './spec_helper'
+
 
 describe Blockchain do
   let!(:blockchain) { Blockchain.new }

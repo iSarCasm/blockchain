@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/guilleiguaran/fakeredis.git
+  revision: b4317f93e93a9e80e6badc78dfe6ec85e6256cdc
+  specs:
+    fakeredis (0.5.0)
+      redis (>= 3.2, < 5.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -31,6 +38,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  fakeredis!
   redis
   rspec
   sinatra

@@ -5,3 +5,4 @@ gem 'sinatra'
 gem 'redis'
 
 gem 'rspec'
+gem 'fakeredis', git: 'https://github.com/guilleiguaran/fakeredis.git'
